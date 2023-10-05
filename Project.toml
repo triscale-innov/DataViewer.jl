@@ -1,0 +1,7 @@
+name = "DataViewer"
+uuid = "69fa7e04-3a55-42d6-bb08-3ca48704fbef"
+authors = ["TriScale innov <contact@triscale-innov.com>"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.9.3"
