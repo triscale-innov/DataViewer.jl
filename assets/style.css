@@ -1,0 +1,13 @@
+.clickable-row {
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.clickable-row:hover {
+    text-decoration: underline;
+}
+
+.button-bar {
+    margin-bottom: 1em;
+}

@@ -1,0 +1,12 @@
+DataViewer.jl
+Copyright (c) 2023 TriScale innov <contact@triscale-innov.com>
+
+
+The CSS files vendored in `assets/bootstrap-5.3.1` come from
+the Bootstrap project (https://github.com/twbs/bootstrap)
+Copyright (c) 2011-2023 The Bootstrap Authors.
+
+
+The SVG files vendored in `assets/bootstrap-icons-1.10.5` come from
+the Bootstrap Icons project (https://github.com/twbs/icons)
+Copyright (c) 2011-2023 The Bootstrap Authors.
