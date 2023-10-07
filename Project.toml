@@ -21,4 +21,5 @@ JLD2_Ext = "JLD2"
 JSON_Ext = "JSON"
 
 [compat]
+HTTP = "1"
 julia = "1.9.3"
