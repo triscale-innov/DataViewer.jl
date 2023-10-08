@@ -1,7 +1,13 @@
 *.jl.*.cov
 *.jl.cov
 *.jl.mem
+*~
 /Manifest.toml
+/app/Manifest.toml
+/app/dataviewer.so
+/app/sample.*
+/assets/Manifest.toml
+/coverage
 /docs/Manifest.toml
 /docs/build/
-*~
+/test/Manifest.toml
