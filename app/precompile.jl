@@ -1,7 +1,5 @@
 using DataViewer, HDF5, JLD2, JSON
 using DataViewer: recurse_into, pretty_repr, graphic_repr, open_datafile, RepresentationOption
-# using DataViewer.Internal.JSServe
-# using DataViewer.Internal.Electron
 
 function view(data, name; target=nothing)
     win = DataViewer.Internal.view(data, name; target)

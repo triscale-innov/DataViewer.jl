@@ -1,7 +1,0 @@
-#!/usr/bin/env julia
-
-const JULIA = first(Base.julia_cmd())
-const APP_ROOT = @__DIR__
-const SYSIMAGE = joinpath(APP_ROOT, "dataviewer.so")
-const MAIN = joinpath(APP_ROOT, "main.jl")
-run(`$JULIA --project=$APP_ROOT --sysimage $SYSIMAGE $MAIN $ARGS`)

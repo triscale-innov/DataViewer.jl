@@ -8,6 +8,7 @@ Electron = "a1bb12fb-d4d1-54b4-b10a-ee7951ef7ad3"
 HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSServe = "824d6782-a2ef-11e9-3a09-e5662e0c26f9"
 PrecompileTools = "aea7be01-6a6a-4083-8856-8a6e6704d82a"
+Scratch = "6c6a2e73-6563-6170-7368-637461726353"
 WGLMakie = "276b4fcb-3e11-5398-bf8b-a0c2d153d008"
 
 [weakdeps]

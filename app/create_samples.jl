@@ -1,7 +1,6 @@
-include("setup.jl")
-using DataView.JLD2
-using DataView.HDF5
-using DataView.JSON
+using JLD2
+using HDF5
+using JSON
 
 data = let t=0:0.02:2π
     Dict(

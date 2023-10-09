@@ -129,4 +129,7 @@ data file itself is closed as well.
 """
 view(fname::String, ftype::String = "") = Internal.view(fname, ftype)
 
+
+include("precompile.jl")
+
 end
