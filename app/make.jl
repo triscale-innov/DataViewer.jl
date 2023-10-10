@@ -1,12 +1,10 @@
-import Pkg
 using DataViewer
 using PackageCompiler
 
 const APP_DIR = @__DIR__
 sysimage_path = joinpath(APP_DIR, "dataviewer.so")
 
-packages = Symbol.(keys(Pkg.project().dependencies))
-filter!(!=(:PackageCompiler), packages)
+packages = [:DataViewer, :NativeFileDialog, :HDF5, :JLD2, :JSON]
 
 @info("Creating system image",
       name = sysimage_path,

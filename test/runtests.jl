@@ -111,4 +111,19 @@ end
 
         @test_throws "No known filetype" filetype("foo.txt")
     end
+
+    @testset "Install" begin
+        mktempdir() do tmpdir
+            DataViewer.Internal.install(
+                destdir  = tmpdir,
+                app_dir  = tmpdir,
+                command  = "dataviewer",
+                force    = false,
+                sysimage = false)
+
+            @test ispath(joinpath(tmpdir, "Project.toml"))
+            @test ispath(joinpath(tmpdir, "Manifest.toml"))
+            @test ispath(joinpath(tmpdir, "dataviewer"))
+        end
+    end
 end

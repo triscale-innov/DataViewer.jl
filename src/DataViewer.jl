@@ -130,6 +130,31 @@ data file itself is closed as well.
 view(fname::String, ftype::String = "") = Internal.view(fname, ftype)
 
 
+"""
+    install(; command::String = "dataviewer",
+              destdir::String = joinpath(DEPOT_PATH[1], "bin"),
+              force::Bool     = false,
+              sysimage::Bool  = true)
+
+Install a DataViewer launcher script to the `destdir` directory, with filename
+`command`. The default directory is a `bin` subfolder inside the first
+`DEPOT_PATH` entry, which usually translates to `~/.julia/bin`. Add this
+directory to your `PATH` environment variable in order to more easily run the
+DataViewer launcher.
+
+Set `force` to `true` to overwrite an existing destination file with the same
+path.
+
+If `sysimage` is `true` (the default), a system image is compiled and the
+launcher script is set up to use it.
+"""
+function install(; command::String = "dataviewer",
+                 destdir::String   = joinpath(DEPOT_PATH[1], "bin"),
+                 force::Bool       = false,
+                 sysimage::Bool    = true)
+    Internal.install(; command, destdir, force, sysimage)
+end
+
 include("precompile.jl")
 
 end

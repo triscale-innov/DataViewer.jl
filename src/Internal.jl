@@ -4,7 +4,9 @@ using Electron
 using JSServe
 using WGLMakie
 using HTTP.URIs
+using Scratch
 
+import DataViewer
 import DataViewer: pretty_repr, graphic_repr, recurse_into, get_data, filetype, open_datafile
 
 include("datatypes.jl")
@@ -12,6 +14,7 @@ include("text_repr.jl")
 include("graphic_repr.jl")
 
 include("viewer.jl")
+include("install.jl")
 
 function view(data, name::String; target=nothing)
     WGLMakie.activate!()
