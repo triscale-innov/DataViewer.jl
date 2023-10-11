@@ -20,22 +20,17 @@ function install(; command, destdir, force, sysimage,
           pkg_dir = pkg_dir,
           launcher = launcher)
 
-    function make_executable(fname)
-        mode = stat(fname).mode | 0o111
-        chmod(fname, mode)
-    end
-
     cd(app_dir) do
         @info "Copying files"
         for fname in ("Project.toml", "make.jl", "main.jl", "precompile.jl", "create_samples.jl")
             cp(joinpath(pkg_dir, "app", fname), fname, force=true)
         end
+        rm("Manifest.toml", force=true)
 
         @info "Installing app environment"
         script = quote
             import Pkg
             Pkg.develop(path=$pkg_dir)
-            Pkg.resolve()
             Pkg.instantiate()
         end
         run(`$julia --project -e $script`)
@@ -81,6 +76,11 @@ function install(; command, destdir, force, sysimage,
     end
     open(launcher, "w") do f
         println(f, launcher_script)
+    end
+
+    function make_executable(fname)
+        mode = stat(fname).mode | 0o111
+        chmod(fname, mode)
     end
     make_executable(launcher)
 end

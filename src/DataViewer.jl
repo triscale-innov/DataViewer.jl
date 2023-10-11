@@ -98,6 +98,7 @@ julia> open_datafile("sample.jld2", ftype) do data
            println(typeof(data))
        end
 Dict
+```
 """
 function open_datafile end
 

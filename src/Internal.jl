@@ -27,12 +27,9 @@ function view(data, name::String; target=nothing)
     route!(server, r"^/graph/" => app)
     route!(server, "/" => app)
 
-    electron_display = JSServe.use_electron_display()
+    electron_display = JSServe.use_electron_display(devtools = false)
     display(app)
-    sleep(1)
-    win = electron_display.window
-    Electron.toggle_devtools(win)
-    return win
+    return electron_display.window
 end
 
 function view(fname::String, ftype::String)
