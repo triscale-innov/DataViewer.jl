@@ -1,8 +1,80 @@
+function sysimage_name()
+    ext = if Sys.iswindows()
+        "dll"
+    elseif Sys.isapple()
+        "dylib"
+    else
+        "so"
+    end
+    "sysimage.$ext"
+end
+
+function shell_script(cmd)
+    _quot(x) = "'$x'"
+    _join(a, b) = "$a \\\n     $b"
+    cmd = mapreduce(_quot, _join, cmd)
+    """
+    #!/bin/bash
+
+    exec $cmd \\
+         "\$@"
+    """
+end
+
+function batch_script(cmd)
+    _quot(x) = "\"$x\""
+    _join(a, b) = "$a ^\n     $b"
+    cmd = mapreduce(_quot, _join, cmd)
+    """
+    $cmd ^
+         %*
+    """
+end
+
+function make_launcher(julia, app_dir, sysimage, launcher)
+    cmd = ["$julia", "--project=$app_dir"]
+
+    if (sysimage)
+        img_path = joinpath(app_dir, sysimage_name())
+        push!(cmd, "--sysimage=$img_path")
+    end
+
+    push!(cmd, joinpath(app_dir, "main.jl"))
+
+    launcher_script = if Sys.iswindows()
+        batch_script(cmd)
+    else
+        shell_script(cmd)
+    end
+
+    open(launcher, "w") do f
+        println(f, launcher_script)
+    end
+
+    let
+        # chmod +x
+        mode = stat(launcher).mode | 0o111
+        chmod(launcher, mode)
+    end
+end
+
 function install(; command, destdir, force, sysimage,
                  app_dir::String = get_scratch!(DataViewer, "app"))
     julia   = first(Base.julia_cmd())
     pkg_dir = joinpath(@__DIR__, "..")
 
+    if ispath(destdir)
+        if !isdir(destdir)
+            @error "Destination is not a directory. Refusing to clobber" destdir
+            return
+        end
+    else
+        mkpath(destdir)
+    end
+
+    if Sys.iswindows() & !endswith(command, ".bat")
+        command = command * ".bat"
+    end
     launcher = joinpath(destdir, command)
 
     if ispath(launcher)
@@ -50,37 +122,5 @@ function install(; command, destdir, force, sysimage,
     end
 
     @info "Installing launcher script" target=launcher
-    launcher_script = let
-        cmd = ["$julia"]
-
-        push!(cmd, "--project=$app_dir")
-
-        if (sysimage)
-            img_path = joinpath(app_dir, "dataviewer.so")
-            push!(cmd, "--sysimage=$img_path")
-        end
-
-        push!(cmd, joinpath(app_dir, "main.jl"))
-
-        map!(cmd, cmd) do arg
-            "'$arg'"
-        end
-        cmd = join(cmd, " \\\n     ")
-
-        """
-        #!/bin/bash
-
-        exec $cmd \\
-             "\$@"
-        """
-    end
-    open(launcher, "w") do f
-        println(f, launcher_script)
-    end
-
-    function make_executable(fname)
-        mode = stat(fname).mode | 0o111
-        chmod(fname, mode)
-    end
-    make_executable(launcher)
+    make_launcher(julia, app_dir, sysimage, launcher)
 end
