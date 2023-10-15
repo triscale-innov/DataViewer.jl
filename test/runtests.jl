@@ -2,7 +2,7 @@ using DataViewer
 using Test
 
 using DataViewer: pretty_repr, recurse_into, graphic_repr, get_data, filetype, open_datafile
-using DataViewer.Internal: Viewer
+using DataViewer.Internal: Viewer, script_name, sysimage_name
 using DataViewer.Internal.JSServe
 using HDF5, JLD2, JSON
 
@@ -123,7 +123,8 @@ end
 
             @test ispath(joinpath(tmpdir, "Project.toml"))
             @test ispath(joinpath(tmpdir, "Manifest.toml"))
-            @test ispath(joinpath(tmpdir, "dataviewer"))
+            @test ispath(joinpath(tmpdir, script_name("dataviewer")))
+            @test startswith(sysimage_name(), "sysimage")
         end
     end
 end

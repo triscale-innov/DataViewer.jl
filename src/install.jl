@@ -9,6 +9,10 @@ function sysimage_name()
     "sysimage.$ext"
 end
 
+function script_name(command)
+    Sys.iswindows() ? "$command.bat" : "$command"
+end
+
 function shell_script(cmd)
     _quot(x) = "'$x'"
     _join(a, b) = "$a \\\n     $b"
@@ -72,10 +76,7 @@ function install(; command, destdir, force, sysimage,
         mkpath(destdir)
     end
 
-    if Sys.iswindows() & !endswith(command, ".bat")
-        command = command * ".bat"
-    end
-    launcher = joinpath(destdir, command)
+    launcher = joinpath(destdir, script_name(command))
 
     if ispath(launcher)
         if force
