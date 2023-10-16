@@ -114,6 +114,7 @@ end
 
     @testset "Install" begin
         mktempdir() do tmpdir
+            ENV["JULIA_PKG_PRECOMPILE_AUTO"] = 0 # No need to precompile everything
             DataViewer.Internal.install(
                 destdir  = tmpdir,
                 app_dir  = tmpdir,
