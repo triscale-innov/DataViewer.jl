@@ -7,7 +7,7 @@
 
 **Explore your data files with the power of [Makie](https://docs.makie.org/stable/)!**
 
-![](docs/screencast.gif)
+![](docs/src/screencast.mp4)
 
 ## Use as a Julia package
 

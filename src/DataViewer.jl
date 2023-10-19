@@ -121,8 +121,12 @@ view(data, name::String = "") = Internal.view(data, name)
 """
     view(fname::String, ftype = "")
 
-Open a viewer window for the data contained in file `fname`. The extension of
-`fname` is used to determine how to read it.
+Open a viewer window for the data contained in file `fname`.
+
+The extension of `fname` is normally used to determine how to read it. But the
+optional argument `ftype` may be provided to override this behavior. In this
+case, `ftype` should be a file extension associated to the file format (for
+example: `".jld2"` for JLD2 files).
 
 Because the file may need to be accessed during the whole browsing session, this
 function does not return until the window has been closed, at which point the
