@@ -7,7 +7,7 @@
 
 **Explore your data files with the power of [Makie](https://docs.makie.org/stable/)!**
 
-https://triscale-innov.github.io/DataViewer.jl/dev/screencast.mp4
+https://github.com/triscale-innov/DataViewer.jl/assets/376712/bffabeef-c5cd-41b5-bcf0-7f6757042fec
 
 ## Use as a Julia package
 
