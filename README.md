@@ -7,7 +7,7 @@
 
 **Explore your data files with the power of [Makie](https://docs.makie.org/stable/)!**
 
-![](docs/src/screencast.mp4)
+![](https://triscale-innov.github.io/DataViewer.jl/dev/screencast.mp4)
 
 ## Use as a Julia package
 
